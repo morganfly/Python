@@ -23,21 +23,21 @@ class Car(scrapy.Spider):
             yield Request(url, callback=self.parse2)
         # xpth='//p[@class="tw_gmpage"]/a[last()]/@href'
         # next_url = response.xpath(xpth).extract()
-        net = response.body[response.body.find(b'tw_gmpage"><a'):response.body.find(b'id="tw_newcar')]
+        net = response.body[response.body.find('tw_gmpage"><a'):response.body.find('id="tw_newcar')]
         print(net)
         url = re.findall(r'/car/0-0-0-0-0-0-9-0-0-0-0-\d/', net)
-        print(url)
+        # print url
         for i in url:
-            yield Request('http://newcar.xcar.com.cn' + i, callback=self.parse)
+            yield Request('http://newcar .xcar.com.cn' + i, callback=self.parse)
 
     def parse2(self, response):
 
         item = ScrapytestItem()
-        xpth = '//span[@class="lt_f1"]/text()|//div[@class="tt_h1"]/h1/text()'
+        xpth = '//span[@class="lt_f1"]/text()|c//div[@class="tt_h1"]/h1/text()'
         name2 = response.xpath(xpth).extract()
         name3 = name2[0] + name2[1]
         item['car_name'] = name3
-        xpth = '//div[@class="place"]/a[2]/text()'
+        xpth = '//div[@class="placepython "]/a[2]/text()'
         type = response.xpath(xpth).extract()
         item['type'] = type[0]
         item['price'] = '123'
