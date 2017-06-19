@@ -35,6 +35,7 @@ class Car(scrapy.Spider):
         item = ScrapytestItem()
         xpth = '//span[@class="lt_f1"]/text()|c//div[@class="tt_h1"]/h1/text()'
         name2 = response.xpath(xpth).extract()
+        print(name2)
         name3 = name2[0] + name2[1]
         item['car_name'] = name3
         xpth = '//div[@class="placepython "]/a[2]/text()'
